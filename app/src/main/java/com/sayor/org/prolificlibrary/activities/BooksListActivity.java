@@ -1,7 +1,8 @@
-package com.sayor.org.prolificlibrary;
+package com.sayor.org.prolificlibrary.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.sayor.org.prolificlibrary.R;
 
 public class BooksListActivity extends AppCompatActivity {
 
