@@ -4,26 +4,30 @@ import com.sayor.org.prolificlibrary.models.Book;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
+// service created for using retrofit
 public class BookService {
 
-    private static final String WEB_SERVICE_BASE_URL = "http://prolific-interview.herokuapp.com/56c77c0889f430000996afa9";
-    //private final ProlificBookService mWebService;
+    private static final String WEB_SERVICE_BASE_URL = "http://prolific-interview.herokuapp.com";
+    private static ProlificBookService mWebService;
 
-    public BookService() {
+  public static ProlificBookService getClient() {
+    if (mWebService == null) {
 
-      Retrofit retrofit = new Retrofit.Builder()
+      Retrofit client = new Retrofit.Builder()
           .baseUrl(WEB_SERVICE_BASE_URL)
+          .addConverterFactory(GsonConverterFactory.create())
           .build();
 
-      ProlificBookService service = retrofit.create(ProlificBookService.class);
+      mWebService = client.create(ProlificBookService.class);
     }
+    return mWebService ;
+  }
 
-    private interface ProlificBookService {
-      @GET("/books")
-      Call<List<Book>> listBooks(@Path("books") String book);
+    public interface ProlificBookService {
+      @GET("/56c77c0889f430000996afa9/books")
+      Call<List<Book>> listBooks();
     }
-
   }

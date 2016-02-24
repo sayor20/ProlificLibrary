@@ -10,8 +10,12 @@ import android.support.v7.widget.Toolbar;
 import com.sayor.org.prolificlibrary.R;
 import com.sayor.org.prolificlibrary.adapters.BookAdapter;
 import com.sayor.org.prolificlibrary.models.Book;
+import com.sayor.org.prolificlibrary.services.BookService;
 import java.util.ArrayList;
 import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BooksListActivity extends AppCompatActivity {
 
@@ -27,19 +31,25 @@ public class BooksListActivity extends AppCompatActivity {
       setContentView(R.layout.activity_books_list);
       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
       setSupportActionBar(toolbar);
-
       // loading dummy data
       books = new ArrayList<>();
-      book1  = new Book();
-      book1.setTitle("Lord of the Rings");
-      book1.setAuthor("Tolkien");
-      book1.setCategories("Fiction Novel");
-      book2  = new Book();
-      book2.setTitle("Harry potter");
-      book2.setAuthor("Rowling");
-      book2.setCategories("Fiction Novel");
-      books.add(book1);
-      books.add(book2);
+
+      // used retrofit to get JSON data from server
+
+      BookService.ProlificBookService bookService= BookService.getClient();
+      Call<List<Book>> call = bookService.listBooks();
+      call.enqueue(new Callback<List<Book>>() {
+        @Override public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+          books = response.body();
+          bookAdapter = new BookAdapter(books);
+          rvBookList.setAdapter(bookAdapter);
+
+        }
+
+        @Override public void onFailure(Call<List<Book>> call, Throwable t) {
+
+        }
+      });
 
       fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -49,7 +59,6 @@ public class BooksListActivity extends AppCompatActivity {
       rvBookList.setHasFixedSize(true);
       rvBookList.setItemAnimator(new DefaultItemAnimator());
       rvBookList.getItemAnimator().setAddDuration(1000);
-      updateUI();
     }
 
     private void updateUI() {

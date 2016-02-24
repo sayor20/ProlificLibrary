@@ -3,14 +3,17 @@ package com.sayor.org.prolificlibrary.models;
 /**
  * Created by Sayor on 2/22/16.
  */
+
+// model class for JSON data from server
 public class Book {
 
+  public  String id;
   public String author;
   public String categories;
   public String publisher;
   public String title;
   public String url;
-  public String lastcheckedut;
+  public String lastCheckedOut;
   public String lastCheckOutBy;
 
   public String getAuthor() {
@@ -53,12 +56,20 @@ public class Book {
     this.url = url;
   }
 
-  public String getLastcheckedut() {
-    return lastcheckedut;
+  public String getId() {
+    return id;
   }
 
-  public void setLastcheckedut(String lastcheckedut) {
-    this.lastcheckedut = lastcheckedut;
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getLastCheckedOut() {
+    return lastCheckedOut;
+  }
+
+  public void setLastCheckedOut(String lastCheckedOut) {
+    this.lastCheckedOut = lastCheckedOut;
   }
 
   public String getLastCheckOutBy() {
