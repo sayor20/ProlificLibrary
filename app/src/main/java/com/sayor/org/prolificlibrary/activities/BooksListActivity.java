@@ -53,7 +53,7 @@ public class BooksListActivity extends AppCompatActivity implements AddBooksFrag
         public void onClick(View view) {
           android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
           AddBooksFragment df = new AddBooksFragment();
-          df.show(manager, "add_dialog");
+          df.show(manager, getString(R.string.add_dialog));
         }
       });
 
@@ -64,27 +64,6 @@ public class BooksListActivity extends AppCompatActivity implements AddBooksFrag
       rvBookList.setItemAnimator(new DefaultItemAnimator());
       rvBookList.getItemAnimator().setAddDuration(1000);
     }
-
-  private void methodGET() {
-    if(bookService==null)
-      bookService = BookService.getClient();
-    Call<List<Book>> getCall = bookService.getBooks();
-    getCall.enqueue(new Callback<List<Book>>() {
-      @Override public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
-        Toast.makeText(getBaseContext(), "Book added successfully", Toast.LENGTH_SHORT).show();
-        books = response.body();
-        appBookList = BookList.get(getApplicationContext());
-        appBookList.addAllmBooks(response.body());
-        bookAdapter = new BookAdapter(appBookList.getmBooks());
-        rvBookList.setAdapter(bookAdapter);
-      }
-
-      @Override public void onFailure(Call<List<Book>> call, Throwable t) {
-        Log.e("retrofiterr", t.getMessage());
-        Toast.makeText(getBaseContext(), "Error in adding book", Toast.LENGTH_SHORT).show();
-      }
-    });
-  }
 
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate menu resource file.
@@ -109,17 +88,39 @@ public class BooksListActivity extends AppCompatActivity implements AddBooksFrag
   }
 
   private void setUpDialog() {
-    new AlertDialog.Builder(this).setTitle("Delete book")
-        .setMessage("Do you want to delete this book?")
-        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+    new AlertDialog.Builder(this).setTitle(getString(R.string.cleanbook))
+        .setMessage(getString(R.string.deleteallmsg))
+        .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
             methodCLEAN();
             dialog.dismiss();
           }
         })
-        .setNegativeButton("Cancel", null)
+        .setNegativeButton(getString(R.string.cancel), null)
         .create().show();
+  }
+
+  private void methodGET() {
+    if(bookService==null)
+      bookService = BookService.getClient();
+    Call<List<Book>> getCall = bookService.getBooks();
+    getCall.enqueue(new Callback<List<Book>>() {
+      @Override public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+        Toast.makeText(getBaseContext(), getString(R.string.getmsg), Toast.LENGTH_SHORT).show();
+        books = response.body();
+        appBookList = BookList.get(getApplicationContext());
+        appBookList.addAllmBooks(response.body());
+        bookAdapter = new BookAdapter(appBookList.getmBooks());
+        bookAdapter.notifyDataSetChanged();
+        rvBookList.setAdapter(bookAdapter);
+      }
+
+      @Override public void onFailure(Call<List<Book>> call, Throwable t) {
+        Log.e(getString(R.string.retroerr), t.getMessage());
+        Toast.makeText(getBaseContext(), getString(R.string.geterr), Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   private void methodCLEAN() {
@@ -128,12 +129,12 @@ public class BooksListActivity extends AppCompatActivity implements AddBooksFrag
     Call<Book> postCall = bookService.deleteAllBooks();
     postCall.enqueue(new Callback<Book>() {
       @Override public void onResponse(Call<Book> call, Response<Book> response) {
-        Toast.makeText(getBaseContext(), "All books deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), getString(R.string.cleanmsg), Toast.LENGTH_SHORT).show();
       }
 
       @Override public void onFailure(Call<Book> call, Throwable t) {
-        Log.e("retrofiterr", t.getMessage());
-        Toast.makeText(getBaseContext(), "Error in deleting all books", Toast.LENGTH_SHORT).show();
+        Log.e(getString(R.string.retroerr), t.getMessage());
+        Toast.makeText(getBaseContext(), getString(R.string.cleanerr), Toast.LENGTH_SHORT).show();
       }
     });
   }

@@ -1,12 +1,41 @@
 <resources>
     <string name="app_name">ProlificLibrary</string>
     <string name="hello_blank_fragment">Add Books</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="title">Title</string>
     <string name="auth">Author</string>
     <string name="pub">Publisher</string>
     <string name="cat">Categories</string>
-    <string name="err_title">Please enter title</string>
-    <string name="err_auth">Please enter author</string>
-    <string name="err_pub">Please enter publisher</string>
-    <string name="err_cat">Please enter Category</string>
+    <string name="til">title</string>
+    <string name="checkout">CheckedOut</string>
+    <string name="checkoutby">CheckOut by</string>
+    <string name="author">auth</string>
+    <string name="category">cat</string>
+    <string name="clean">Delete All</string>
+    <string name="checkmsg">Do you want to checkout this book?</string>
+    <string name="deletemsg">Do you want to delete this book?</string>
+    <string name="deleteallmsg">Do you want to delete all books?</string>
+    <string name="addbook">Add Book</string>
+    <string name="checkbook">Checkout Book</string>
+    <string name="deletebook">Delete Book</string>
+    <string name="updatebook">Update Book</string>
+    <string name="cleanbook">Delete All Book</string>
+
+
+    <string name="name">Please enter your name</string>
+    <string name="putmsg">Book updated successfully</string>
+    <string name="puterr">Error in updating book</string>
+    <string name="getmsg">Book fetched successfully</string>
+    <string name="geterr">Error in fetching book</string>
+    <string name="cleanmsg">"All books deleted"</string>
+    <string name="cleanerr">Error in deleting all books</string>
+    <string name="postmsg">"Book added successfully"</string>
+    <string name="posterr">Error in posting book</string>
+    <string name="delmsg">"Book deleted successfully"</string>
+    <string name="delerr">Error in deleting book</string>
+    <string name="add_dialog">adddialog</string>
+    <string name="retroerr">retroerror</string>
 </resources>

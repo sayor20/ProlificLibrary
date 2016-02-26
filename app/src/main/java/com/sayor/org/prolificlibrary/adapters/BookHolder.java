@@ -57,20 +57,21 @@ public class BookHolder extends RecyclerView.ViewHolder implements View.OnClickL
     }
 
   @Override public boolean onLongClick(final View v) {
-    new AlertDialog.Builder(v.getContext()).setTitle("Delete Items")
-        .setMessage("Do you want to delete this book?")
-        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            //changes to singleton class
-            BookList appBookList = BookList.get(v.getContext());
-            Book book = appBookList.getmBooks(getAdapterPosition());
-            methodDELETE(Integer.parseInt(book.getId()), v);
-            dialog.dismiss();
-          }
-        })
-        .setNegativeButton("Cancel", null)
-        .create().show();
+    new AlertDialog.Builder(v.getContext()).setTitle(
+        v.getResources().getString(R.string.deletebook))
+        .setMessage(v.getResources().getString(R.string.deletemsg))
+            .setPositiveButton(v.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                //changes to singleton class
+                BookList appBookList = BookList.get(v.getContext());
+                Book book = appBookList.getmBooks(getAdapterPosition());
+                methodDELETE(Integer.parseInt(book.getId()), v);
+                dialog.dismiss();
+              }
+            })
+            .setNegativeButton(v.getResources().getString(R.string.cancel), null)
+            .create().show();
       return true;
   }
 
@@ -80,12 +81,12 @@ public class BookHolder extends RecyclerView.ViewHolder implements View.OnClickL
     Call<Book> postCall = bookService.deleteBooks(bookID);
     postCall.enqueue(new Callback<Book>() {
       @Override public void onResponse(Call<Book> call, Response<Book> response) {
-        Toast.makeText(v.getContext(), "Book deleted successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(v.getContext(), v.getResources().getString(R.string.delmsg), Toast.LENGTH_SHORT).show();
       }
 
       @Override public void onFailure(Call<Book> call, Throwable t) {
-        Log.e("retrofiterr", t.getMessage());
-        Toast.makeText(v.getContext(), "Error in deleting book", Toast.LENGTH_SHORT).show();
+        Log.e(v.getResources().getString(R.string.retroerr), t.getMessage());
+        Toast.makeText(v.getContext(), v.getResources().getString(R.string.delerr), Toast.LENGTH_SHORT).show();
       }
     });
 

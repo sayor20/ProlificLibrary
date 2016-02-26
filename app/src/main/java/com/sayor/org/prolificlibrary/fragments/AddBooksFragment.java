@@ -36,7 +36,7 @@ public class AddBooksFragment extends android.support.v4.app.DialogFragment {
 
         AlertDialog ad = new AlertDialog.Builder(getActivity()).setTitle("Add Book")
                 .setView(v)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                   @Override
                   public void onClick(DialogInterface dialog, int which) {
                     Book book = new Book();
@@ -48,7 +48,7 @@ public class AddBooksFragment extends android.support.v4.app.DialogFragment {
                     mListener.rvUpdateCallback();
                   }
                 })
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .create();
         ad.show();
 
@@ -56,6 +56,7 @@ public class AddBooksFragment extends android.support.v4.app.DialogFragment {
       final View positiveAction = ad.getButton(DialogInterface.BUTTON_POSITIVE);
       positiveAction.setEnabled(false);
 
+      // title edittext textwatcher
       etTitle.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -73,6 +74,7 @@ public class AddBooksFragment extends android.support.v4.app.DialogFragment {
         public void afterTextChanged(Editable s) {}
       });
 
+      // author edittext textwatcher
       etAuthor.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -90,6 +92,7 @@ public class AddBooksFragment extends android.support.v4.app.DialogFragment {
         public void afterTextChanged(Editable s) {}
       });
 
+      // publisher edittext textwatcher
       etPub.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -107,6 +110,7 @@ public class AddBooksFragment extends android.support.v4.app.DialogFragment {
         public void afterTextChanged(Editable s) {}
       });
 
+      // category edittext textwatcher
       etCat.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -133,12 +137,12 @@ public class AddBooksFragment extends android.support.v4.app.DialogFragment {
     Call<Book> postCall = bookService.addBooks(book);
     postCall.enqueue(new Callback<Book>() {
       @Override public void onResponse(Call<Book> call, Response<Book> response) {
-        Toast.makeText(v.getContext(), "Book posted successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(v.getContext(), getString(R.string.postmsg), Toast.LENGTH_SHORT).show();
       }
 
       @Override public void onFailure(Call<Book> call, Throwable t) {
-        Log.e("retrofiterr", t.getMessage());
-        Toast.makeText(v.getContext(), "Error in posting book", Toast.LENGTH_SHORT).show();
+        Log.e(getString(R.string.retroerr), t.getMessage());
+        Toast.makeText(v.getContext(), getString(R.string.posterr), Toast.LENGTH_SHORT).show();
       }
     });
   }

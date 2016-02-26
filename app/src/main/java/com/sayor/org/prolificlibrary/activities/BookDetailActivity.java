@@ -39,7 +39,7 @@ public class BookDetailActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_book_detail1);
+    setContentView(R.layout.activity_book_detail);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
     setSupportActionBar(toolbar);
 
@@ -93,10 +93,10 @@ public class BookDetailActivity extends AppCompatActivity {
 
   public void onCheckOut(View v){
     final BookList bookList = BookList.get(getParent());
-    AlertDialog ad = new AlertDialog.Builder(this).setTitle("Checkout book")
+    AlertDialog ad = new AlertDialog.Builder(this).setTitle(getString(R.string.checkbook))
         .setView(R.layout.checkout_book)
-        .setMessage("Do you want to checkout this book?")
-        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        .setMessage(getString(R.string.checkmsg))
+        .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
             Dialog dial = (Dialog) dialog;
@@ -109,7 +109,7 @@ public class BookDetailActivity extends AppCompatActivity {
             dialog.dismiss();
           }
         })
-        .setNegativeButton("Cancel", null)
+        .setNegativeButton(getString(R.string.cancel), null)
         .create();
 
       ad.show();
@@ -121,12 +121,12 @@ public class BookDetailActivity extends AppCompatActivity {
     Call<Book> postCall = bookService.updateBook(id, book);
     postCall.enqueue(new Callback<Book>() {
       @Override public void onResponse(Call<Book> call, Response<Book> response) {
-        Toast.makeText(getBaseContext(), "Book updated successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), getString(R.string.putmsg), Toast.LENGTH_SHORT).show();
       }
 
       @Override public void onFailure(Call<Book> call, Throwable t) {
-        Log.e("retrofiterr", t.getMessage());
-        Toast.makeText(getBaseContext(), "Error in updating book", Toast.LENGTH_SHORT).show();
+        Log.e(getString(R.string.retroerr), t.getMessage());
+        Toast.makeText(getBaseContext(), getString(R.string.puterr), Toast.LENGTH_SHORT).show();
       }
     });
   }
