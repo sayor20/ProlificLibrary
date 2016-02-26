@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ProlificLibrary</string>
+    <string name="hello_blank_fragment">Add Books</string>
+    <string name="title">Title</string>
+    <string name="auth">Author</string>
+    <string name="pub">Publisher</string>
+    <string name="cat">Categories</string>
+    <string name="err_title">Please enter title</string>
+    <string name="err_auth">Please enter author</string>
+    <string name="err_pub">Please enter publisher</string>
+    <string name="err_cat">Please enter Category</string>
 </resources>

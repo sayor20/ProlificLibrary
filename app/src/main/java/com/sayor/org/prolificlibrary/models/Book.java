@@ -14,7 +14,7 @@ public class Book {
   public String title;
   public String url;
   public String lastCheckedOut;
-  public String lastCheckOutBy;
+  public String lastCheckedOutBy;
 
   public String getAuthor() {
     return author;
@@ -72,15 +72,12 @@ public class Book {
     this.lastCheckedOut = lastCheckedOut;
   }
 
-  public String getLastCheckOutBy() {
-    return lastCheckOutBy;
+  public String getLastCheckedOutBy() {
+    return lastCheckedOutBy;
   }
 
-  public void setLastCheckOutBy(String lastCheckOutBy) {
-    this.lastCheckOutBy = lastCheckOutBy;
+  public void setLastCheckedOutBy(String lastCheckedOutBy) {
+    this.lastCheckedOutBy = lastCheckedOutBy;
   }
-
-
-
 
 }

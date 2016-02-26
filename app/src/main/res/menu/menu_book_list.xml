@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:support="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".BooksListActivity">
+  <item
+      android:id="@+id/menu_delete"
+      android:icon="@drawable/ic_delete"
+      android:title="Delete All"
+      support:showAsAction="ifRoom"/>
+</menu>

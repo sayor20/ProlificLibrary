@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:support="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".BookDetailActivity">
+  <item
+      android:id="@+id/menu_item_share"
+      android:title="Share"
+      support:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+      support:showAsAction="always"/>
+</menu>

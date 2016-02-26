@@ -3,6 +3,7 @@
     package="com.sayor.org.prolificlibrary" >
     <application
         android:allowBackup="true"
+        android:name=".MyApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar"
@@ -15,6 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.BookDetailActivity" >
+          <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="com.sayor.org.prolificlibrary.activities.BooksListActivity" />
         </activity>
     </application>
   <uses-permission android:name="android.permission.INTERNET" />
